@@ -1,0 +1,32 @@
+library(shiny)
+library(caret)
+library(rpart)
+data(iris)
+
+
+shinyServer(
+     function(input, output) {
+          
+          output$accuracy <- renderText({
+               set.seed(8613)
+               inTrain <- createDataPartition(y = iris$Species, p = .75, list = FALSE)
+               training <- iris[inTrain,]; testing <- iris[-inTrain,]
+               
+               modelFit <- train(Species ~., data = training, method = input$trainMethod)
+               compareSet <- data.frame(actual = testing$Species, predicted = predict(modelFit, newdata = testing))
+               paste0(as.character(100*sum(compareSet$actual == compareSet$predicted)/nrow(compareSet)),"%")
+          })
+          
+          output$prediction <- renderText({
+               set.seed(8613)
+               inTrain <- createDataPartition(y = iris$Species, p = .75, list = FALSE)
+               training <- iris[inTrain,]; testing <- iris[-inTrain,]
+               
+               modelFit <- train(Species ~., data = training, method = input$trainMethod)
+               as.character(predict(modelFit, newdata = data.frame(Sepal.Length = input$SL,
+                                                                   Sepal.Width = input$SW,
+                                                                   Petal.Length = input$PL,
+                                                                   Petal.Width = input$PW)))
+          })
+     }
+)
