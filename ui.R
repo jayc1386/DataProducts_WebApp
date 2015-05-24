@@ -3,6 +3,8 @@ data(iris)
 
 shinyUI(pageWithSidebar(
      headerPanel("Iris Prediction"),
+     
+     ### INPUTS
      sidebarPanel(
           h3("Algorithm"),
           selectInput("trainMethod", "Prediction Type", c("rpart","rf")),
@@ -17,6 +19,8 @@ shinyUI(pageWithSidebar(
           sliderInput("PW", "Petal Width", min(iris$Petal.Width), 
                       min = min(iris$Petal.Width), max = max(iris$Petal.Width), step = .1)
      ),
+     
+     ### OUTPUTS
      mainPanel(
           h4("Prediction Algorithm Accuracy"),
           h5(textOutput('accuracy')),

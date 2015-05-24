@@ -3,10 +3,10 @@ library(caret)
 library(rpart)
 data(iris)
 
-
 shinyServer(
      function(input, output) {
           
+          ### DISPLAY ACCURACY OF SELECTED ALGORITHM
           output$accuracy <- renderText({
                set.seed(8613)
                inTrain <- createDataPartition(y = iris$Species, p = .75, list = FALSE)
@@ -17,6 +17,7 @@ shinyServer(
                paste0(as.character(100*sum(compareSet$actual == compareSet$predicted)/nrow(compareSet)),"%")
           })
           
+          ### PREDICT BASED ON USER INPUTS
           output$prediction <- renderText({
                set.seed(8613)
                inTrain <- createDataPartition(y = iris$Species, p = .75, list = FALSE)
