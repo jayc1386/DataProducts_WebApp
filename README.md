@@ -1,0 +1,3 @@
+## Shiny App
+
+This shiny app displays a prediction algorithm in a easily accessible web format. In this app, the user can first select which machine learning algorithm he chooses to use (between "rpart" and "rf). After selecting the algorithm, the user can select different inputs used in the dataset to make the prediction. The app will select the result that it has been trained on with the algorithm. This app uses the Iris dataset, allowing the user to adjust the Sepal and Petal Widths and Lengths in order to predict the Species.
