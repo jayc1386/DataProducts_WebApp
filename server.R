@@ -1,6 +1,8 @@
 library(shiny)
 library(caret)
 library(rpart)
+library(e1071)
+library(randomForest)
 data(iris)
 
 shinyServer(
